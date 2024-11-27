@@ -35,3 +35,19 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_rtc.read_datetime.return_value = datetime(2024, 11, 27, 20, 0, 0)  # Mercoledì
         system.blinds_open = True
         system.manage_blinds_based_on_time()
+
+    @patch.object(IntelligentOffice, "change_servo_angle")
+    @patch.object(IntelligentOffice, "rtc", create=True)
+    def test_manage_blinds_opens_at_saturday(self, mock_rtc: Mock, mock_change_servo_angle: Mock):
+        system = IntelligentOffice()
+        mock_rtc.read_datetime.return_value = datetime(2024, 11, 30, 8, 0, 0)  #Sabato
+        system.blinds_open = False
+        system.manage_blinds_based_on_time()
+
+    @patch.object(IntelligentOffice, "change_servo_angle")
+    @patch.object(IntelligentOffice, "rtc", create=True)
+    def test_manage_blinds_opens_at_sunday(self, mock_rtc: Mock, mock_change_servo_angle: Mock):
+        system = IntelligentOffice()
+        mock_rtc.read_datetime.return_value = datetime(2024, 11, 10, 8, 0, 0)  #Domenica
+        system.blinds_open = False
+        system.manage_blinds_based_on_time()
