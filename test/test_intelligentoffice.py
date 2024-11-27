@@ -15,3 +15,8 @@ class TestIntelligentOffice(unittest.TestCase):
         mock_distance_sensor.return_value = True
         occupied = system.check_quadrant_occupancy(system.INFRARED_PIN1)
         self.assertTrue(occupied)
+
+    @patch.object(GPIO, "input")
+    def test_check_quadrant_occupancy_raises_error(self, mock_distance_sensor: Mock):
+        system = IntelligentOffice()
+        self.assertRaises(IntelligentOfficeError, system.check_quadrant_occupancy, -1)

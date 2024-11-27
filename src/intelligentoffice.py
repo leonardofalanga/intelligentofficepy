@@ -13,8 +13,6 @@ except:
     import mock.SDL_DS3231 as SDL_DS3231
     import mock.board as board
     import mock.adafruit_veml7700 as adafruit_veml7700
-
-
 class IntelligentOffice:
 
     INFRARED_PIN1 = 11 # First infrared distance sensor pin
@@ -54,8 +52,7 @@ class IntelligentOffice:
         self.buzzer_on = False
 
     def check_quadrant_occupancy(self, pin: int) -> bool:
-        # To be implemented
-        pass
+        return GPIO.input(pin)
 
     def manage_blinds_based_on_time(self) -> None:
         # To be implemented
@@ -64,7 +61,6 @@ class IntelligentOffice:
     def manage_light_level(self) -> None:
         # To be implemented
         pass
-
 
     def monitor_air_quality(self) -> None:
         # To be implemented
@@ -83,3 +79,4 @@ class IntelligentOffice:
 
 class IntelligentOfficeError(Exception):
     pass
+
