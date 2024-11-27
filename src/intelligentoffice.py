@@ -55,8 +55,13 @@ class IntelligentOffice:
         return GPIO.input(pin)
 
     def manage_blinds_based_on_time(self) -> None:
-        # To be implemented
-        pass
+        current_time = self.rtc.read_datetime()
+        if current_time.hour == 8 and not self.blinds_open:
+            self.change_servo_angle(7.5)  # Open the blinds
+            self.blinds_open = True
+        elif current_time.hour == 20 and self.blinds_open:
+            self.change_servo_angle(2.5)  # Close the blinds
+            self.blinds_open = False
 
     def manage_light_level(self) -> None:
         # To be implemented
