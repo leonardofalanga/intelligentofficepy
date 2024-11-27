@@ -1,5 +1,3 @@
-import time
-
 DEPLOYMENT = False  # This variable is to understand whether you are deploying on the actual hardware
 
 try:
@@ -52,6 +50,8 @@ class IntelligentOffice:
         self.buzzer_on = False
 
     def check_quadrant_occupancy(self, pin: int) -> bool:
+        if pin < 0:
+            raise IntelligentOfficeError("Invalid pin number")
         return GPIO.input(pin)
 
     def manage_blinds_based_on_time(self) -> None:
